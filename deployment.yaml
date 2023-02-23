@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: baymax
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: baymax
+  namespace: baymax
+spec:
+  selector:
+   matchLabels:
+    app: baymax
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: baymax
+        role: baymax
+    spec:
+      containers:
+        - name: baymax
+          image: udecdj2022/baymax:haep
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: baymax
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: baymax
+  namespace: baymax
+  labels:
+    app: baymax
+spec:
+  selector:
+   app: baymax
+  type: ExternalName
+  externalName: nginx-internal.service-ns.svc.cluster.local
+  #type: LoadBalancer
+  type: ClusterIP
+  #loadBalancerIP: 148.213.1.146
+  ports:
+   - name: http
+     port: 80
+     protocol: TCP
+     targetPort: 80
+     #nodePort: 30000
+  selector:
+    role: baymax
