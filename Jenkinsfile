@@ -38,9 +38,9 @@ pipeline {
 
    stage('Restarting POD'){
    steps{
-    sshagent(['sshsanchez'])
+    sshagent(['digesetuserssh'])
     {
-     sh 'scp -r -o StrictHostKeyChecking=no deployment-baymax.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+     sh 'scp -r -o StrictHostKeyChecking=no deployment-baymax.yaml digesetuser@148.213.1.133:/home/digesetuser/baymax/'
       script{
         try{
            sh 'ssh digesetuser@148.213.1.133 microk8s.kubectl apply -f  deployment-baymax.yaml --kubeconfig=/home/digesetuser/.kube/config'

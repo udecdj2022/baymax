@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: baymax
-          image: udecdj2022/baymax:vpipeline
+          image: variantggg/aaa1:vpipeline
           imagePullPolicy: Always
           ports:
             - containerPort: 80
