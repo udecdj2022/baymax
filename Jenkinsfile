@@ -43,7 +43,7 @@ pipeline {
      sh 'scp -r -o StrictHostKeyChecking=no deployment-baymax.yaml digesetuser@148.213.1.133:/home/digesetuser/baymax'
       script{
         try{
-           sh 'ssh digesetuser@148.213.1.133 microk8s.kubectl apply -f  deployment-baymax.yaml --kubeconfig=/home/digesetuser/.kube/config'
+           sh 'ssh digesetuser@148.213.1.133 microk8s.kubectl apply -f  /home/digesetuser/baymax/deployment-baymax.yaml --kubeconfig=/home/digesetuser/.kube/config'
            sh 'ssh digesetuser@148.213.1.133 microk8s.kubectl rollout restart deployment baymax -n baymax --kubeconfig=/home/digesetuser/.kube/config' 
            sh 'ssh digesetuser@148.213.1.133 microk8s.kubectl rollout status deployment baymax -n baymax --kubeconfig=/home/digesetuser/.kube/config'
           }catch(error)
