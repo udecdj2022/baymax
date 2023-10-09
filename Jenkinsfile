@@ -1,7 +1,7 @@
 pipeline {
 
   environment {
-    dockerimagename = "udecdj2022/baymax"
+    dockerimagename = "variantggg/aaa1"
     dockerImage = ""
   }
 
@@ -11,7 +11,7 @@ pipeline {
 
     stage('Checkout Code') { 
       steps {
-        git credentialsId: 'githubhernan', url: 'https://github.com/udecdj2022/baymax.git', branch:'main'
+        git credentialsId: 'variantggg_dockerhub', url: 'https://github.com/udecdj2022/baymax.git', branch:'main'
       }
     }
 
@@ -43,9 +43,9 @@ pipeline {
      sh 'scp -r -o StrictHostKeyChecking=no deployment-baymax.yaml digesetuser@148.213.1.131:/home/digesetuser/'
       script{
         try{
-           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f  deployment-baymax.yaml --kubeconfig=/home/digesetuser/.kube/config'
-           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment baymax -n baymax --kubeconfig=/home/digesetuser/.kube/config' 
-           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment baymax -n baymax --kubeconfig=/home/digesetuser/.kube/config'
+           sh 'ssh digesetuser@148.213.1.133 microk8s.kubectl apply -f  deployment-baymax.yaml --kubeconfig=/home/digesetuser/.kube/config'
+           sh 'ssh digesetuser@148.213.1.133 microk8s.kubectl rollout restart deployment baymax -n baymax --kubeconfig=/home/digesetuser/.kube/config' 
+           sh 'ssh digesetuser@148.213.1.133 microk8s.kubectl rollout status deployment baymax -n baymax --kubeconfig=/home/digesetuser/.kube/config'
           }catch(error)
        {}
      }
